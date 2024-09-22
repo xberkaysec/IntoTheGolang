@@ -10,7 +10,7 @@ Amacımız, Go yazmanın nasıl bir deneyim olduğunu anlamaktır; bu nedenle, k
 
 1. Senaryoyu Belirleme
 
-Hayal edin ki bir erkek arkadaşınız bekarlığıa veda partisinin ev sahipliğini yapıyor ve 
+Hayal edin ki bir erkek arkadaşınız bekarlığa veda partisinin ev sahipliğini yapıyor ve 
 davetlilerin elektronik ortamda katılım bildirmesi için bir web uygulaması oluşturmanızı istiyor.
 Arkadaşınızın istediği temel özellikler şunlardır:
 
