@@ -175,3 +175,99 @@ Resim :
 
 Go, belirli bir kod stiline uymayı zorunlu kılar ve yaygın kod öğeleri (noktalı virgül gibi) ile alışılmadık şekillerde ilgilenir.
 
+## Go ile Özel Veri Türü ve Koleksiyon Oluşturma
+
+Go dilinde, özel veri türleri tanımlamak ve koleksiyonlar oluşturmak, uygulama geliştirme sürecinin önemli bir parçasıdır.
+Bu yazıda, RSVP yanıtlarını temsil eden bir veri türü oluşturmayı ve bu yanıtları bir koleksiyonda saklamayı öğreneceksiniz.
+
+1. Özel Veri Türü Tanımlama
+
+Öncelikle, RSVP yanıtlarını temsil eden bir veri türü tanımlayalım. 
+Aşağıdaki kod parçası, Rsvp adında bir yapı (struct) oluşturmaktadır:
+
+```golang
+package main
+
+import "fmt"
+
+type Rsvp struct {
+	Name, Email, PhoneNumber string
+	Participation            bool
+}
+```
+
+
+Bu yapı, dört alan içermektedir: Name, Email, PhoneNumber ve Participation. 
+Name, Email ve PhoneNumber alanları string veri türünde, Participation alanı ise boolean (bool) veri türündedir.
+Go dilinde özel türler tanımlamak için type anahtar kelimesi kullanılır. 
+Yapılar, ilişkili değerlerin bir arada gruplanmasına olanak tanır.
+
+2. Yanıtları Toplama
+
+RSVP yanıtlarını toplamak için bir koleksiyon oluşturmamız gerekiyor. 
+İlerleyen bölümlerde veritabanı kullanımı hakkında bilgi vereceğiz; ancak bu bölümde yanıtları bellekte saklayacağız. 
+Bu nedenle, uygulama durdurulduğunda yanıtlar kaybolacaktır.
+
+Go, fixed length arrays(sabit uzunlukta dizeler), variable length arrays (değişken uzunlukta dizeler) ve 
+key-value pairs(anahtar-değer çiftleri) içeren haritalar (maps) için yerleşik destek sunar. 
+
+Aşağıdaki kod parçası, bilinmeyen sayıda değer depolamak için uygun olan bir dilim (slice) oluşturmaktadır:
+
+```golang
+var responses = make([]*Rsvp, 0, 10)
+```
+
+
+3. Slice Tanımlama Açıklaması
+
+Yukarıdaki kodda, make fonksiyonu kullanılarak yeni bir slice oluşturulmaktadır. 
+'make' fonksiyonu üç argüman alır: slice veri türü, başlangıç boyutu ve başlangıç kapasitesi.
+
+- Başlangıç Boyutu: 0 olarak ayarlandığında boş bir slice oluşturulur.
+- Başlangıç Kapasitesi: 10 olarak belirlendiğinde, slice 10 eleman eklenmeden önce yeniden boyutlandırılmasına gerek kalmayacaktır.
+
+Slice tanımında kullanılan *Rsvp, Rsvp yapısının işaretçilerini (pointer) içeren bir dilimi temsil eder. 
+İşaretçi kullanımı, değerlerin kopyalanmasını önleyerek bellek kullanımını optimize eder.
+
+Kodu kullanmak için tam hali şu şekil de :
+
+```golang
+package main
+
+import "fmt"
+
+type Rsvp struct {
+	Name, Email, PhoneNumber string
+	Participation            bool
+}
+
+var response = make([]*Rsvp, 0, 10)
+
+func main() {
+
+	newRsvp := &Rsvp{
+		Name:          "BerKolik",
+		Email:         "berkolik@example.com",
+		PhoneNumber:   "123-456-7890",
+		Participation: true,
+	}
+
+	newRsvp2 := &Rsvp{
+		Name:          "BerKolikTwo",
+		Email:         "berkoliktwo@example.com",
+		PhoneNumber:   "123-456-4321",
+		Participation: true,
+	}
+
+	newRsvp3 := &Rsvp{
+		Name:          "BerKolikThree",
+		Email:         "berkolikthree@example.com",
+		PhoneNumber:   "123-456-3214",
+		Participation: true,
+	}
+
+	response = append(response, newRsvp, newRsvp2, newRsvp3)
+
+	fmt.Println(response)
+}
+```
