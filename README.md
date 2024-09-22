@@ -59,3 +59,119 @@ tüm popüler işletim sistemleri için kurulum dosyaları mevcuttur. Projeye ba
 
 Eğer Visual Studio Code’u beğenmiyorsanız, [buradan](https://github.com/golang/go/wiki/IDEsAndTextEditorPlugins) mevcut diğer seçenekleri görebilirsiniz.
 
+## Go ile Web Uygulaması Geliştirme Projesi Oluşturma
+
+Go programlama dili ile web uygulamaları geliştirmek için ilk adım, projenizi oluşturmaktır. 
+"bachelorette" adında bir proje oluşturmayı öğreneceksiniz. 
+
+1. Proje Klasörünü Oluşturma
+
+Öncelikle, bir komut istemcisi açın ve uygun bir konuma gidin. 
+Ardından, aşağıdaki komutla "bachelorette" adında bir klasör oluşturun:
+
+```bash
+mkdir bachelorette
+cd bachelorette
+```
+
+Resim :
+
+![Resim](https://i.ibb.co/zFKbPYZ/Bachelorette-File.png)
+
+2. Go Projesini Başlatma
+
+Klasöre girdikten sonra, yeni bir Go projesi başlatmak için aşağıdaki komutu çalıştırın:
+
+```bash
+go mod init bachelorette
+```
+
+Bu komut, projenizin bağımlılıklarını takip eden bir go.mod dosyası oluşturur. 
+Ayrıca, projenizi gerektiğinde yayınlamak için de kullanılabilir.
+
+![Resim](https://i.ibb.co/1XFSw6m/resim-2024-09-22-142821998.png)
+
+3. Main Go Dosyasını Oluşturma
+
+Go kod dosyaları .go uzantısına sahiptir. 
+Seçtiğiniz editörü kullanarak "main.go" adında bir dosya oluşturun ve aşağıdaki içeriği ekleyin:
+
+```golang
+package main
+
+import "fmt"
+
+func main() {
+    fmt.Println("Hello World!")
+}
+```
+
+![Resim](https://i.ibb.co/G5yXB7X/resim-2024-09-22-143218374.png)
+
+Eğer Visual Studio Code kullanıyorsanız ve bu sizin ilk Go dosyanızsa, Go dilini destekleyen uzantıları yüklemeniz istenecektir.
+
+![Resim](https://i.ibb.co/h180Xmc/VS-Code-Golang.png)
+
+## Go Dilinin Temel Yapısı
+
+Go dilinin sözdizimi, C veya C benzeri diller (C#, Java vb.) ile tanıdık gelebilir. 
+Go dilini derinlemesine inceleyeceğiz, ancak kodun yapısına ve anahtar kelimelerine bakarak çok şey öğrenebilirsiniz.
+
+- Package: Özellikler paketler halinde gruplanır; bu nedenle package ifadesi kullanılır.
+- Import: Diğer paketlere bağımlılıkları belirtmek için import ifadesi kullanılır.
+- Function: İşlevler func anahtar kelimesi ile tanımlanır. main işlevi, uygulamanın başlangıç noktasıdır.
+
+Yukarıdaki kodda main fonksiyonu, fmt paketinden sağlanan Println fonksiyonunu çağırır ve "Hello World!" mesajını ekrana yazdırır.
+
+
+4. Projeyi Derleme ve Çalıştırma
+
+Projeyi derleyip çalıştırmak için aşağıdaki komutu kullanın:
+
+```bash
+go run .
+```
+
+Bu komut, geliştirme sürecinde oldukça kullanışlıdır çünkü derleme ve çalıştırma işlemlerini tek adımda gerçekleştirir. 
+
+Uygulama şu çıktıyı verecektir:
+
+```
+Hello World!
+```
+
+Resim :
+
+![Resim](https://i.ibb.co/KVzWN6m/Go-Run.png)
+
+Eğer bir derleyici hatası alırsanız, muhtemelen kodu tam olarak belirtilen şekilde girmemişsinizdir. 
+Go, belirli bir kod biçimini zorunlu kılar. 
+
+5. Kod Biçimlendirme Hatası
+
+Eğer kodu aşağıdaki gibi yazdıysanız:
+
+```golang
+package main
+
+import "fmt"
+
+func main()
+{
+    fmt.Println("Hello World!")
+}
+```
+
+Aşağıdaki hatalarla karşılaşabilirsiniz:
+
+```bash
+missing function body
+syntax error: unexpected semicolon or newline before {
+```
+
+Resim :
+
+![Resim](https://i.ibb.co/1rDpfvL/Go-Error.png)
+
+Go, belirli bir kod stiline uymayı zorunlu kılar ve yaygın kod öğeleri (noktalı virgül gibi) ile alışılmadık şekillerde ilgilenir.
+
